@@ -21,10 +21,12 @@ const FieldStyeld = styled.div`
     background: url(${add}) no-repeat center / 30px auto;
   }
 `
-export const TextField = () => {
+const TextField = ({onClick, onChange}) => {
   return <FieldStyeld>
-    <Input type="text" name="name" placeholder="이름" />
-    <Input type="text" name="phone" placeholder="휴대폰 번호" />
-    <Button theme="default"></Button>
+    <Input type="text" name="name" placeholder="이름" onChange={({target}) => onChange(target)} />
+    <Input type="text" name="phone" placeholder="휴대폰 번호" onChange={({target}) => onChange(target)} />
+    <Button theme="default" onClick={onClick}></Button>
   </FieldStyeld>
 }
+
+export default TextField
