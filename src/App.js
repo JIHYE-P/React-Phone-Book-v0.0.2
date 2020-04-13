@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
 import { TextField } from './components/molecule/TextField';
-import { List } from './components/organism/List';
+import { InfoList } from './components/molecule/InfoList';
+import { ModifyField } from './components/molecule/ModifyField';
 
 function App() {
   return (
     <div className="App">
       <TextField />
-      <List />
+      <InfoList />
+      <ModifyField />
     </div>
   );
 }

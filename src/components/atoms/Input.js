@@ -14,4 +14,4 @@ const InputStyled = styled.input`
     border-color: #aaa;
   }
 `
-export const Input = props => <InputStyled {...props}></InputStyled>
+export const Input = props => <InputStyled {...props} autoComplete="off"></InputStyled>

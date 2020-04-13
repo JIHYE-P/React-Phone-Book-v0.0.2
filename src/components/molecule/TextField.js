@@ -3,13 +3,12 @@ import styled from 'styled-components'
 import { Input } from '../atoms/Input'
 import { Button } from '../atoms/Button'
 
-
 const add = require('../../images/add.svg')
-
 const FieldStyeld = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255,255,255,0.25);
   input {
     width: 50%;
     margin-left: 10px;

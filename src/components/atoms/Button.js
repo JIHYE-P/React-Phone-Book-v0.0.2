@@ -12,5 +12,9 @@ const ButtonStyled = styled.button`
   color: #333;
   outline: none;
   cursor: pointer;
+  &:hover, &:active {
+  box-shadow:  5px 5px 15px #ffffff, -5px -5px 15px #bec3c9;
+  }
+
 `
 export const Button = (props) => <ButtonStyled {...props}></ButtonStyled>
