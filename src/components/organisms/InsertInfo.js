@@ -2,15 +2,19 @@ import React from 'react'
 import { InfoConsumer } from './Context'
 import TextField from '../molecule/TextField'
 
-const InsertInfo = props => {
+const InsertInfo = () => {
+  const ref = React.createRef()
   return <InfoConsumer>
     {
-      // onClick, onChange
-      ({info, setInfo}) => {
+      ({data, setData, info, setInfo}) => {
         const onChange = target => {
-        
+          const value = {[target.name] : target.value}
+          setData(value)
         }
-        return <TextField onChange={onChange}></TextField>
+        const onClick = target => {
+          ref.current.querySelectorAll('input').forEach(el => el.value = '')
+        }
+      return <TextField ref={ref} onChange={onChange} onClick={onClick}></TextField>
       }
     }
   </InfoConsumer>
