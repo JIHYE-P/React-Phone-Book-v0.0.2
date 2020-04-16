@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Input } from '../atoms/Input'
 import { Button } from '../atoms/Button'
@@ -22,12 +22,21 @@ const FieldStyeld = styled.div`
   }
 `
 
-const TextField = React.forwardRef(({onClick, onChange}, ref) => {
-  return <FieldStyeld ref={ref} >
-    <Input type="text" name="name" placeholder="이름" onChange={({target}) => onChange(target)} />
-    <Input type="text" name="phone" placeholder="휴대폰 번호" onChange={({target}) => onChange(target)} />
-    <Button theme="default" onClick={onClick}></Button>
+let id = 0
+const TextField = ({setValue}) => {
+  const init = {name: '', phone: ''}
+  const [data, setData] = useState(init)
+  const onChange = ({target}) => setData({...data, [target.name]: target.value})
+  const onClick = () => {
+    if(data.name === '' || data.phone === '') return
+    setData(init)
+    typeof setValue === 'function' && setValue({id: id++, ...data})
+  }
+  return <FieldStyeld>
+    <Input type="text" name="name" placeholder="이름" value={data.name} onChange={onChange} />
+    <Input type="text" name="phone" placeholder="휴대폰 번호" value={data.phone} onChange={onChange} />
+    <Button theme="default" type="submit" onClick={onClick}></Button>
   </FieldStyeld>
-})
+}
 
 export default TextField

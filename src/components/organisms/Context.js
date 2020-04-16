@@ -1,28 +1,38 @@
-import React, { createContext, useState, useEffect } from 'react'
-import { STORAGE_NAME } from '../../util'
+import React, { createContext, useState } from 'react'
+import TextField from '../molecule/TextField'
+import InfoList from '../molecule/InfoList'
 
 const Context = createContext()
-const {Consumer: InfoConsumer} = Context;
 
-const InfoProvider = props => {
-  const format = {name: '', phone: ''}
-  const [data, setData] = useState(format)
+export const InfoProvider = props => {
   const [info, setInfo] = useState([])
   const value = {
-    data,
-    setData: value => setData(Object.assign(data, value)),
-    info,
-    setInfo: value => setInfo(info.concat(value))
+    info, 
+    setInfo: value => setInfo(info.concat(value)), 
+    setDeleted: id => setInfo(info.filter(info => info.id !== id)),
   }
-  useEffect(() => {
-    localStorage.setItem(STORAGE_NAME, JSON.stringify(info))
-    setInfo(JSON.parse(localStorage.getItem(STORAGE_NAME) || []))
-  }, [])
-
   return <Context.Provider value={value} {...props}></Context.Provider>
 }
 
-export {
-  InfoProvider,
-  InfoConsumer
+export const InsertPhoneBook = () => {
+  return <Context.Consumer>
+    {
+      ({info, setInfo, setDeleted}) => {
+        const setValue = data => setInfo(data)
+        const onDelete = id => setDeleted(id)
+        return <>
+          <TextField setValue={setValue} value={info}></TextField>
+          {
+            info.map(({name, phone, id}, index) => (
+              <InfoList
+                key={index}
+                name={name}
+                phone={phone}
+                onDelete={() => onDelete(id)} />
+            ))
+          }
+        </>
+      }
+    }
+  </Context.Consumer>
 }

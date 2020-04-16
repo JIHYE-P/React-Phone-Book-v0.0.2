@@ -28,17 +28,17 @@ const InfoListStyled = styled(ListStyled)`
     }
   }
 `
-
-export const InfoList = () => {
+const InfoList = ({name, phone, onDelete}) => {
   return <InfoListStyled>
     <ListItem>
       <div className="information">
-        <span>홍길동 / 010.1234.5678</span>
+        <span>{name} / {phone}</span>
       </div>
       <div className="control">
-        <Button className="modify"></Button>
-        <Button className="delete"></Button>
+        <Button className="delete" onClick={onDelete}></Button>
       </div>
     </ListItem>
   </InfoListStyled>
 }
+
+export default InfoList

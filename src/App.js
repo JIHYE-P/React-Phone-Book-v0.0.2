@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import { InfoProvider } from './components/organisms/Context';
-import InsertInfo from './components/organisms/InsertInfo';
+import { InfoProvider, InsertPhoneBook } from './components/organisms/Context';
 
 function App() {
   return (
     <div className="App">
       <InfoProvider>
-        <InsertInfo></InsertInfo>
+        <InsertPhoneBook />
       </InfoProvider>
     </div>
   );
